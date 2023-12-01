@@ -4,7 +4,7 @@ import Register from "./pages/Register";
 import ChatPage from "./pages/ChatPages";
 import UpdateProfile from "./pages/UpdateProfile";
 import "./style.scss";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 
@@ -28,6 +28,8 @@ function App() {
             index
             element={
               <ProtectedRoute>
+                <Link to="/">Home Page</Link>|
+                <Link to="/chatspage">Chat With Humans</Link>
                 <Home />
               </ProtectedRoute>
             }

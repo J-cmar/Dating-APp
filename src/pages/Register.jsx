@@ -34,22 +34,20 @@ const Register = () => {
             await updateProfile(res.user, {
               displayName,
               photoURL: downloadURL,
-              bio: null,
-              age: null,
+              // bio: null,
+              // age: null,
             });
             //create user on firestore
             await setDoc(doc(db, "users", res.user.uid), {
               uid: res.user.uid,
               displayName,
               email,
-              photoURL: downloadURL,
-              bio:null,
-              age:null,
+              photoURL: downloadURL
             });
 
             //create empty user chats on firestore
             await setDoc(doc(db, "userChats", res.user.uid), {});
-            navigate("/");
+            navigate("/updateprofile");
           } catch (err) {
             console.log(err);
             setErr(true);
