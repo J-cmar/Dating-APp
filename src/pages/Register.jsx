@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Add from "../img/addAvatar.png";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db, storage } from "../firebase";
@@ -34,6 +34,8 @@ const Register = () => {
             await updateProfile(res.user, {
               displayName,
               photoURL: downloadURL,
+              bio: null,
+              age: null,
             });
             //create user on firestore
             await setDoc(doc(db, "users", res.user.uid), {
@@ -41,6 +43,8 @@ const Register = () => {
               displayName,
               email,
               photoURL: downloadURL,
+              bio:null,
+              age:null,
             });
 
             //create empty user chats on firestore
@@ -78,7 +82,7 @@ const Register = () => {
           {err && <span>Something went wrong</span>}
         </form>
         <p>
-          You do have an account? <Link to="/register">Login</Link>
+          You do have an account? <Link to="/login">Login</Link>
         </p>
       </div>
     </div>
