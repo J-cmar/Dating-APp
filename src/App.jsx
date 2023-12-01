@@ -28,7 +28,7 @@ function App() {
             index
             element={
               <ProtectedRoute>
-                <Link to="/">Home Page</Link>|
+                <Link to="/">Home Page</Link>  |
                 <Link to="/chatspage">Chat With Humans</Link>
                 <Home />
               </ProtectedRoute>
