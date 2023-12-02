@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Add from "../img/addAvatar.png";
+import unknown from '../img/blank-avatar.png';
 import { db, storage } from "../firebase";
 import { AuthContext } from "../context/AuthContext";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
@@ -46,6 +47,19 @@ const UpdateProfile = () => {
     }
   };
 
+  const showPhoto = (e) =>{
+    const userProfImg = document.getElementById("userImage");
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        userProfImg.src = e.target.result;
+        userProfImg.hidden = false;
+      };
+      reader.readAsDataURL(file);
+    }
+    console.log("went through")
+  }
 
 
 
@@ -55,10 +69,15 @@ const UpdateProfile = () => {
         <span className="logo">Fumble</span>
         <span className="logo">Please Update Profile</span>
         <form onSubmit={handleSubmit}>
-          <input required style={{ display: "none" }} type="file" id="file" />
+          <input required 
+          style={{ display: "none" }} 
+          type="file" 
+          id="file" 
+          onChange={showPhoto}
+          />
           <label htmlFor="file">
             <img src={Add} alt="" />
-            <span>Add an Photo</span>
+            <span>This is the image people will see when clicking!</span>
           </label>
           <input required type="text" placeholder="Create a bio" />
           <input required type="number" min="18" max="100" placeholder="Enter Age" />
@@ -67,8 +86,14 @@ const UpdateProfile = () => {
           {loading && "Uploading and compressing the image please wait..."}
           {err && <span>Something went wrong</span>}
         </form>
+        <p>Image may be cropped!</p>
         <p>Do later? <Link to="/">Start Viewing!</Link></p>
       </div>
+      <aside>
+        <img src={unknown} height={250} id="userImage" />
+      
+      </aside>
+      
     </div>
   )
 }
