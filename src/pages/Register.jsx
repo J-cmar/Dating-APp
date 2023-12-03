@@ -1,15 +1,37 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Add from "../img/addAvatar.png";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db, storage } from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate, Link } from "react-router-dom";
+import caCities from "../cities/california_cities.json"
 
 const Register = () => {
   const [err, setErr] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const [cities, setCities] = useState([]);
+  const [selectedCity, setSelectedCity] = useState('');
+
+  useEffect(() => {
+  
+    const fetchCities = async () => {
+      try {
+
+        const data = caCities;
+        const cityNames = data.map(city => city.city);
+
+        setCities(cityNames);
+        console.log(cities);
+
+      } catch (error) {
+        console.log("Couldn't fetch cities");
+      }
+    };
+    fetchCities();
+  }, [])
+  
 
   const handleSubmit = async (e) => {
     setLoading(true);
@@ -72,7 +94,23 @@ const Register = () => {
           <input required type="text" placeholder="display name" />
           <input required type="email" name="email" placeholder="email" />
           <input required type="password" placeholder="password" />
-          <input required type="text" placeholder="location" />
+          <label htmlFor="city">Select a california city:</label>
+          <input required
+            list="cityList"
+           placeholder="location" 
+           id="city"
+           name="city"
+           value={selectedCity}
+           onChange={(e) => setSelectedCity(e.target.value)}
+           
+           />
+
+          <datalist id="cityList">
+            {cities.map((city, index) => (
+              <option key={index} value={city} />
+            ))}
+          </datalist>
+
           <input required style={{ display: "none" }} type="file" id="file" />
           <label htmlFor="file">
             <img src={Add} alt="" />
