@@ -25,8 +25,8 @@ const Login = () => {
         <span className="logo">Fumble</span>
         <span className="title">Login</span>
         <form onSubmit={handleSubmit}>
-          <input type="email" placeholder="email" />
-          <input type="password" placeholder="password" />
+          <input type="email" name="email"placeholder="email" />
+          <input type="password" name="password"placeholder="password" />
           <button>Sign in</button>
           {err && <span>Something went wrong</span>}
         </form>

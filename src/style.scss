@@ -14,8 +14,12 @@
   }
 }
 
+body{
+  background-color: rgb(199, 69, 139);
+}
+
 .formContainer {
-  background-color: #a7bcff;
+  background-color: rgb(199, 69, 139);
   height: 100vh;
   display: flex;
   align-items: center;
@@ -93,7 +97,7 @@
 }
 
 .home {
-  background-color: #a7bcff;
+  background-color: rgb(199, 69, 139);
   height: 100vh;
   display: flex;
   align-items: center;
@@ -102,7 +106,7 @@
   .container {
     border: 1px solid white;
     border-radius: 10px;
-    width: 65%;
+    width: 75%;
     height: 80%;
     display: flex;
     overflow: hidden;
@@ -277,7 +281,7 @@
             .messageContent {
               align-items: flex-end;
               p {
-                background-color: #8da4f1;
+                background-color: rgb(199, 69, 139);
                 color: white;
                 border-radius: 10px 0px 10px 10px;
               }
@@ -320,7 +324,7 @@
             border: none;
             padding: 10px 15px;
             color: white;
-            background-color: #8da4f1;
+            background-color: rgb(199, 69, 139);
             cursor: pointer;
           }
         }

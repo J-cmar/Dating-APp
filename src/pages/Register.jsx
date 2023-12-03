@@ -17,7 +17,8 @@ const Register = () => {
     const displayName = e.target[0].value;
     const email = e.target[1].value;
     const password = e.target[2].value;
-    const file = e.target[3].files[0];
+    const userLocation = e.target[3].value;
+    const file = e.target[4].files[0];
 
     try {
       //Create user
@@ -42,7 +43,8 @@ const Register = () => {
               uid: res.user.uid,
               displayName,
               email,
-              photoURL: downloadURL
+              photoURL: downloadURL,
+              location: userLocation
             });
 
             //create empty user chats on firestore
@@ -68,8 +70,9 @@ const Register = () => {
         <span className="title">Register</span>
         <form onSubmit={handleSubmit}>
           <input required type="text" placeholder="display name" />
-          <input required type="email" placeholder="email" />
+          <input required type="email" name="email" placeholder="email" />
           <input required type="password" placeholder="password" />
+          <input required type="text" placeholder="location" />
           <input required style={{ display: "none" }} type="file" id="file" />
           <label htmlFor="file">
             <img src={Add} alt="" />
