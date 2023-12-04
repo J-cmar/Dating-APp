@@ -5,7 +5,8 @@ import { auth, db, storage } from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate, Link } from "react-router-dom";
-import caCities from "../cities/california_cities.json"
+import caCities from "../cities/california_cities.json";
+import './index.css';
 
 const Register = () => {
   const [err, setErr] = useState(false);
@@ -15,7 +16,7 @@ const Register = () => {
   const [selectedCity, setSelectedCity] = useState('');
 
   useEffect(() => {
-  
+
     const fetchCities = async () => {
       try {
 
@@ -31,7 +32,7 @@ const Register = () => {
     };
     fetchCities();
   }, [])
-  
+
 
   const handleSubmit = async (e) => {
     setLoading(true);
@@ -88,22 +89,22 @@ const Register = () => {
   return (
     <div className="formContainer">
       <div className="formWrapper">
-        <span className="logo">Lama Chat</span>
+        <span className="logo">Fumble</span>
         <span className="title">Register</span>
         <form onSubmit={handleSubmit}>
           <input required type="text" placeholder="display name" />
           <input required type="email" name="email" placeholder="email" />
           <input required type="password" placeholder="password" />
-          <label htmlFor="city">Select a california city:</label>
+          <label className="label" htmlFor="city">Select a california city:</label>
           <input required
             list="cityList"
-           placeholder="location" 
-           id="city"
-           name="city"
-           value={selectedCity}
-           onChange={(e) => setSelectedCity(e.target.value)}
-           
-           />
+            placeholder="location"
+            id="city"
+            name="city"
+            value={selectedCity}
+            onChange={(e) => setSelectedCity(e.target.value)}
+
+          />
 
           <datalist id="cityList">
             {cities.map((city, index) => (
@@ -114,7 +115,7 @@ const Register = () => {
           <input required style={{ display: "none" }} type="file" id="file" />
           <label htmlFor="file">
             <img src={Add} alt="" />
-            <span>Please upload a photo for people to see you!</span>
+            <span className="label">Please upload a photo for people to see you!</span>
           </label>
           <button disabled={loading}>Sign up</button>
           {loading && "Uploading and compressing the image please wait..."}

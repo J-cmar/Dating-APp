@@ -54,7 +54,7 @@ const UpdateProfile = () => {
     }
   };
 
-  const showPhoto = (e) =>{
+  const showPhoto = (e) => {
     const userProfImg = document.getElementById("userImage");
     const file = e.target.files[0];
     if (file) {
@@ -74,17 +74,17 @@ const UpdateProfile = () => {
     <div className="formContainer">
       <div className="formWrapper">
         <span className="logo">Fumble</span>
-        <span className="logo">Please Update Profile</span>
+        <span className="title">Please Update Profile</span>
         <form onSubmit={handleSubmit}>
-          <input required 
-          style={{ display: "none" }} 
-          type="file" 
-          id="file" 
-          onChange={showPhoto}
+          <input required
+            style={{ display: "none" }}
+            type="file"
+            id="file"
+            onChange={showPhoto}
           />
           <label htmlFor="file">
             <img src={Add} alt="" />
-            <span>This is the image people will see when clicking!</span>
+            <span className="label">This is the image people will see when clicking!</span>
           </label>
           <input required type="text" placeholder="Create a bio" />
           <input required type="number" min="18" max="100" placeholder="Enter Age" />
@@ -98,9 +98,9 @@ const UpdateProfile = () => {
       </div>
       <aside>
         <img src={unknown} height={250} id="userImage" />
-      
+
       </aside>
-      
+
     </div>
   )
 }
