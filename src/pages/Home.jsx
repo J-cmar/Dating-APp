@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { collection, doc, setDoc, getDoc, query, where, serverTimestamp, getDocs, updateDoc, arrayUnion } from "firebase/firestore";
-import { db, storage, auth } from "../firebase";
+import { db, auth } from "../firebase";
 import { AuthContext } from "../context/AuthContext";
-import { async } from '@firebase/util';
 import { useContext, useEffect } from 'react';
 import account from '../img/blank-avatar.png';
 import { useNavigate } from "react-router-dom";
 import { ChatContext } from "../context/ChatContext";
 import './index.css';
+import { signOut } from "firebase/auth"
 
 // grabs the user location
 const getUserLocation = async (uid) => {
@@ -159,6 +159,15 @@ const Home = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % users.length);
   }
 
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+      navigate('/login');
+    } catch (error) {
+      console.error('Error signing out:', error.message);
+    }
+  }
+
   return (
     // <html>
     //   <div className='home'>
@@ -204,7 +213,7 @@ const Home = () => {
             <a href="/chatsPage" class="text-gray-600 hover:text-red-500 mx-2">Messages</a>
             <a href="#" class="text-gray-600 hover:text-red-500 mx-2">Profile</a>
             <a href="Community_Guidelines.html" class="text-green-600 hover:text-red-500 mx-2">Commmunity Guidelines</a>
-            <a href="/login" class="text-gray-600 hover:text-red-500 mx-2">Logout</a>
+            <a onClick={handleSignOut} class="text-gray-600 hover:text-red-500 mx-2">Logout</a>
           </nav>
         </div>
 
