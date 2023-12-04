@@ -209,9 +209,9 @@ const Home = () => {
           {/* <!-- Add icons for navigation --> */}
           <nav class="flex items-center justify-center mt-4">
             <a href="" class="text-gray-w-900 hover:text-red-500 mx-2">Home</a>
-            <a href="#" class="text-gray-600 hover:text-red-500 mx-2">Matches</a>
+            {/* <a href="#" class="text-gray-600 hover:text-red-500 mx-2">Matches</a> */}
             <a href="/chatsPage" class="text-gray-600 hover:text-red-500 mx-2">Messages</a>
-            <a href="#" class="text-gray-600 hover:text-red-500 mx-2">Profile</a>
+            <a href="/updateprofile" class="text-gray-600 hover:text-red-500 mx-2">Profile</a>
             <a href="Community_Guidelines.html" class="text-green-600 hover:text-red-500 mx-2">Commmunity Guidelines</a>
             <a onClick={handleSignOut} class="text-gray-600 hover:text-red-500 mx-2">Logout</a>
           </nav>
@@ -237,8 +237,8 @@ const Home = () => {
         </div>
 
         {/* <!-- Footer --> */}
-        <div class="bg-gray-800 text-white p-4 text-center">
-          &copy; 2023 CS-2250 Final
+        <div class="bg-gray-800 text-white p-4 text-center mt-60">
+          &copy; Welcome to Fumble
         </div>
 
       </body>

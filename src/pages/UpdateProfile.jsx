@@ -6,6 +6,7 @@ import { db, storage } from "../firebase";
 import { AuthContext } from "../context/AuthContext";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
+
 // import {Cropper} from "react-easy-crop";
 
 
@@ -68,10 +69,33 @@ const UpdateProfile = () => {
     console.log("went through")
   }
 
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+      navigate('/login');
+    } catch (error) {
+      console.error('Error signing out:', error.message);
+    }
+  }
+
 
 
   return (
+    <>
+    <div id="navbar" class="bg-white shadow p-4 w-full">
+    <h1 class="text-2xl font-semibold text-red-500 text-center">Fumble</h1>
+    {/* <!-- Add icons for navigation --> */}
+    <nav class="flex items-center justify-center mt-4">
+      <a href="/" class="text-gray-600 hover:text-red-500 mx-2">Home</a>
+      {/* <a href="#" class="text-gray-600 hover:text-red-500 mx-2">Matches</a> */}
+      <a href="/chatsPage" class="text-gray-w-900 hover:text-red-500 mx-2">Messages</a>
+      <a href="/updateprofile" class="text-gray-600 hover:text-red-500 mx-2">Profile</a>
+      <a href="Community_Guidelines.html" class="text-green-600 hover:text-red-500 mx-2">Commmunity Guidelines</a>
+      <a onClick={handleSignOut} href="/login" class="text-gray-600 hover:text-red-500 mx-2">Logout</a>
+    </nav>
+  </div>
     <div className="formContainer">
+
       <div className="formWrapper">
         <span className="logo">Fumble</span>
         <span className="title">Please Update Profile</span>
@@ -86,7 +110,7 @@ const UpdateProfile = () => {
             <img src={Add} alt="" />
             <span className="label">This is the image people will see when clicking!</span>
           </label>
-          <input required type="text" placeholder="Create a bio" />
+          <input required type="text" placeholder="Update your bio" />
           <input required type="number" min="18" max="100" placeholder="Enter Age" />
           <input required type="text" placeholder="Enter Major" />
           <button disabled={loading}>Update Profile!</button>
@@ -102,6 +126,7 @@ const UpdateProfile = () => {
       </aside>
 
     </div>
+    </>
   )
 }
 
