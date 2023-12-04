@@ -8,8 +8,8 @@ const Navbar = () => {
   const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const handleSignOut = async () =>{
-    
+  const handleSignOut = async () => {
+
     try {
       await signOut(auth);
       navigate('/');
@@ -23,8 +23,6 @@ const Navbar = () => {
       <div className="user">
         <img src={currentUser.photoURL} alt="" />
         <span>{currentUser.displayName}</span>
-        <button onClick={handleSignOut}>logout</button>
-        
       </div>
     </div>
   )

@@ -7,6 +7,7 @@ import { useContext, useEffect } from 'react';
 import account from '../img/blank-avatar.png';
 import { useNavigate } from "react-router-dom";
 import { ChatContext } from "../context/ChatContext";
+import './index.css';
 
 // grabs the user location
 const getUserLocation = async (uid) => {
@@ -72,10 +73,10 @@ const Home = () => {
     const currentUserViewed = users[currentIndex];
     if (currentUserViewed) {
       document.getElementById("img").src = currentUserViewed.viewPhotoURL || account;
-      document.getElementById("name").textContent = "Name: " + currentUserViewed.displayName || '';
-      document.getElementById("age").textContent = "Age: " + currentUserViewed.age || '';
-      document.getElementById("bio").textContent = "Bio: " + currentUserViewed.bio || '';
-      document.getElementById("location").textContent = "Location: " + currentUserViewed.location || '';
+      document.getElementById("name").textContent = currentUserViewed.displayName || '';
+      document.getElementById("age").textContent = currentUserViewed.age + ", Cal Poly Pomona" || '';
+      document.getElementById("bio").textContent = currentUserViewed.bio || '';
+      document.getElementById("location").textContent = currentUserViewed.location + ", CA" || '';
     }
   }
 
@@ -159,28 +160,85 @@ const Home = () => {
   }
 
   return (
-    // {changeUser}
-    <div className='home'>
-      <div className="container">
-        <h1>this is the new home</h1>
-        <h1>WELCOME TO FUMBLE</h1>
-        <br />
-        <br />
-        <hr />
-        <div>
-          <img id="img" alt="" src={account} height={100} />
-          <p id="name"></p>
-          <p id="age"></p>
-          <p id="bio"></p>
-          <p id="location"></p>
+    // <html>
+    //   <div className='home'>
+    //     <div className="container">
+    //       <h1>this is the new home</h1>
+    //       <h1>WELCOME TO FUMBLE</h1>
+    //       <br />
+    //       <br />
+    //       <hr />
+    //       <div>
+    //         <img id="img" alt="" src={account} height={100} />
+    //         <p id="name"></p>
+    //         <p id="age"></p>
+    //         <p id="bio"></p>
+    //         <p id="location"></p>
 
 
-          <button onClick={hitLike}>Like</button>
-          <button onClick={hitDislike}>Dislike</button>
+    //         <button onClick={hitLike}>Like</button>
+    //         <button onClick={hitDislike}>Dislike</button>
+    //       </div>
+
+    //     </div>
+    //   </div>
+
+
+
+
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>My Dating App</title>
+      </head>
+
+      <body class="bg-gray-100 font-sans">
+        <div id="navbar" class="bg-white shadow p-4">
+          <h1 class="text-2xl font-semibold text-red-500 text-center">Fumble</h1>
+          {/* <!-- Add icons for navigation --> */}
+          <nav class="flex items-center justify-center mt-4">
+            <a href="" class="text-gray-w-900 hover:text-red-500 mx-2">Home</a>
+            <a href="#" class="text-gray-600 hover:text-red-500 mx-2">Matches</a>
+            <a href="/chatsPage" class="text-gray-600 hover:text-red-500 mx-2">Messages</a>
+            <a href="#" class="text-gray-600 hover:text-red-500 mx-2">Profile</a>
+            <a href="Community_Guidelines.html" class="text-green-600 hover:text-red-500 mx-2">Commmunity Guidelines</a>
+            <a href="/login" class="text-gray-600 hover:text-red-500 mx-2">Logout</a>
+          </nav>
         </div>
 
-      </div>
-    </div>
+        {/* <!-- Tinder-like card interface for user profiles --> */}
+        <div class="p-4 flex justify-center max-w-1x1 my-20">
+          <div class="bg-white shadow-lg rounded-lg p-6 w-full sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 max-w-1x1">
+            {/* <!-- Profile image --> */}
+            <img id="img" src="./img/profile-photo-1.webp" alt="Profile Image" class="w-full h-40 object-cover rounded-full" />
+            {/* <!-- User information --> */}
+            <h2 id="name" class="text-xl font-semibold mb-2 self-center">Jane Doe</h2>
+            <p id="age" class="text-gray-600">20, Cal Poly Pomona</p>
+            <p id="location" class="text-gray-600">Computer Science</p>
+            {/* <!-- Additional profile details --> */}
+            <p id="bio" class="text-gray-700 mt-4">Hi! My name is Jane, and I like to watch movies!</p>
+            {/* <!-- Like/Dislike buttons --> */}
+            <div class="flex justify-between mt-6">
+              <button onClick={hitLike} class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Like</button>
+              <button onClick={hitDislike} class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Dislike</button>
+            </div>
+          </div>
+        </div>
+
+        {/* <!-- Footer --> */}
+        <div class="bg-gray-800 text-white p-4 text-center">
+          &copy; 2023 CS-2250 Final
+        </div>
+
+      </body>
+    </html>
+
+
+
+
+    // </html>
   )
 }
 
