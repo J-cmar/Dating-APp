@@ -6,9 +6,16 @@ import { db, storage } from "../firebase";
 import { AuthContext } from "../context/AuthContext";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
+// import {Cropper} from "react-easy-crop";
+
 
 
 const UpdateProfile = () => {
+//   const [image, setImage] = useState(null);
+// const [crop, setCrop] = useState({ x: 0, y: 0 });
+// const [zoom, setZoom] = useState(1);
+// const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
+// const imgRef = useRef(null);
   const [err, setErr] = useState(false);
   const [loading, setLoading] = useState(false);
   const { currentUser } = useContext(AuthContext);

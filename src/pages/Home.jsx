@@ -130,9 +130,13 @@ const Home = () => {
           liked: arrayUnion(user.uid)
         });
       }
-    };
+    }
     // jasons thing that works :D
     setCurrentIndex((prevIndex) => (prevIndex + 1) % users.length);
+    if(users[currentIndex + 1] == null){
+      const tag = document.getElementById("noOneTag");
+      tag.hidden=false;
+    }
   }
 
   // if the current user hits the dislike button, we want to add them to the dislike pile
@@ -150,21 +154,23 @@ const Home = () => {
     // {changeUser}
     <div className='home'>
       <div className="container">
-        <h1>this is the new home</h1>
-        <h1>WELCOME TO FUMBLE</h1>
+        <h1 className='title'>WELCOME TO FUMBLE</h1>
         <br />
         <br />
         <hr />
-        <div>
-          <img id="img" alt="" src={account} height={100} />
-          <p id="name"></p>
-          <p id="age"></p>
-          <p id="bio"></p>
-          <p id="location"></p>
+          <div className='user-info'>
+            <img id="img" alt="" src={account} height={100} />
+            <p id="name"></p>
+            <p id="age"></p>
+            <p id="bio"></p>
+            <p id="location"></p>
+            <div className='buttons'>
+              <button onClick={hitLike}>Like</button>
+              <button onClick={hitDislike}>Dislike</button>
+            </div>
 
 
-          <button onClick={hitLike}>Like</button>
-          <button onClick={hitDislike}>Dislike</button>
+          <p id = "noOneTag"hidden>Sorry there's no one else here <br/>&#129335;</p>
         </div>
 
       </div>
