@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { collection, doc, setDoc, getDoc, query, where, onSnapshot, getFirestore, getDocs, updateDoc, arrayUnion } from "firebase/firestore";
+import { collection, doc, setDoc, getDoc, query, where, serverTimestamp, getDocs, updateDoc, arrayUnion } from "firebase/firestore";
 import { db, storage, auth } from "../firebase";
 import { AuthContext } from "../context/AuthContext";
 import { async } from '@firebase/util';
@@ -43,9 +43,9 @@ const Home = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const { currentUser } = useContext(AuthContext);
   const [likedCurrent, setCurrentLiked] = useState([]);
+  const navigate = useNavigate();
 
   if (currentUser == null) {
-    const navigate = useNavigate();
     navigate("/login")
   } else {
     // console.log('not null')
@@ -85,6 +85,7 @@ const Home = () => {
 
     // see if this person has like the current user before
     if (userLiked != null && userLiked.includes(currentUser.uid)) {
+      console.log("gets in there");
       // they have liked this user before
       // check whether the group(chats in firestore) exists, if not create
       const combinedId =
@@ -92,39 +93,36 @@ const Home = () => {
           ? currentUser.uid + user.uid
           : user.uid + currentUser.uid;
       try {
+        // technically creates this?
         const res = await getDoc(doc(db, "chats", combinedId));
-
-        if (!res.exists()) {
-          //create a chat in chats collection
-          await setDoc(doc(db, "chats", combinedId), { messages: [] });
-
-          //create user chats for current user and other user since they matched
-          await updateDoc(doc(db, "userChats", currentUser.uid), {
-            [combinedId + ".userInfo"]: {
-              uid: user.uid,
-              displayName: user.displayName,
-              photoURL: user.photoURL,
-            },
-            [combinedId + ".date"]: serverTimestamp(),
-          });
-
-          await updateDoc(doc(db, "userChats", user.uid), {
-            [combinedId + ".userInfo"]: {
-              uid: currentUser.uid,
-              displayName: currentUser.displayName,
-              photoURL: currentUser.photoURL,
-            },
-            [combinedId + ".date"]: serverTimestamp(),
-          });
-        }
+        //create a chat in chats collection
+        await setDoc(doc(db, "chats", combinedId), { messages: [] });
+        //create user chats for current user and other user since they matched
+        await updateDoc(doc(db, "userChats", currentUser.uid), {
+          [combinedId + ".userInfo"]: {
+            uid: user.uid,
+            displayName: user.displayName,
+            photoURL: user.photoURL
+          },
+          [combinedId + ".date"]: serverTimestamp(),
+        });
+        console.log("does it get past the first user chat?");
+        await updateDoc(doc(db, "userChats", user.uid), {
+          [combinedId + ".userInfo"]: {
+            uid: currentUser.uid,
+            displayName: currentUser.displayName,
+            photoURL: currentUser.photoURL,
+          },
+          [combinedId + ".date"]: serverTimestamp(),
+        });
       } catch (err) { }
     } else if (userDisliked != null && userDisliked.includes(currentUser.uid)) {
       console.log("did not match!");
     } else {
-
       const currentRef = doc(db, "users", currentUser.uid);
       const userDoc = await getDoc(currentRef);
-      if (!userDoc.data().liked.includes(user.uid)) {
+      const newRef = userDoc.data()?.liked || null;
+      if (newRef == null || !newRef.includes(user.uid)) {
         // Add a new user to the "liked" array field if it isn't already in there
         await updateDoc(currentRef, {
           liked: arrayUnion(user.uid)
@@ -133,6 +131,7 @@ const Home = () => {
     };
     // jasons thing that works :D
     setCurrentIndex((prevIndex) => (prevIndex + 1) % users.length);
+    navigate("/chatsPage");
   }
 
   // if the current user hits the dislike button, we want to add them to the dislike pile
