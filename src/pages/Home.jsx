@@ -4,13 +4,15 @@ import { db, storage, auth } from "../firebase";
 import { AuthContext } from "../context/AuthContext";
 import { async } from '@firebase/util';
 import { useContext, useEffect } from 'react';
-import account from '../img/blank-avatar.png'
-import { useNavigate } from "react-router-dom"
+import account from '../img/blank-avatar.png';
+import { useNavigate } from "react-router-dom";
+import { ChatContext } from "../context/ChatContext";
 
 // grabs the user location
 const getUserLocation = async (uid) => {
   const userRef = doc(db, 'users', uid);
   const userDoc = await getDoc(userRef);
+  console.log("userDoc first: " + userDoc);
   console.log("location 2: " + userDoc.data().location);
   return userDoc.data()?.location || null;
 }
@@ -42,8 +44,8 @@ const Home = () => {
   const [users, setUsers] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const { currentUser } = useContext(AuthContext);
-  const [likedCurrent, setCurrentLiked] = useState([]);
   const navigate = useNavigate();
+  const { dispatch } = useContext(ChatContext);
 
   if (currentUser == null) {
     navigate("/login")
@@ -85,7 +87,6 @@ const Home = () => {
 
     // see if this person has like the current user before
     if (userLiked != null && userLiked.includes(currentUser.uid)) {
-      console.log("gets in there");
       // they have liked this user before
       // check whether the group(chats in firestore) exists, if not create
       const combinedId =
@@ -115,8 +116,21 @@ const Home = () => {
           },
           [combinedId + ".date"]: serverTimestamp(),
         });
+        navigate("/chatsPage");
+        // navigate to the user info of this new chat message and push to the chatContext.jsx file
+        // this will render that chat in the chats page
+        const currentRef = doc(db, "userChats", currentUser.uid);
+        const userDoc = await getDoc(currentRef);
+        const temp = userDoc.data();
+        const temp2 = Object.entries(temp);
+        const length = temp2.length;
+        // this is going to grab the most recently made user chat, which should be this one that has just been made
+        const userField = temp2[length - 1];
+        const temp3 = userField[1].userInfo;
+        dispatch({ type: "CHANGE_USER", payload: temp3 });
       } catch (err) { }
     } else if (userDisliked != null && userDisliked.includes(currentUser.uid)) {
+      // NEED TO ADD STUFF HERE
       console.log("did not match!");
     } else {
       const currentRef = doc(db, "users", currentUser.uid);
@@ -131,7 +145,6 @@ const Home = () => {
     };
     // jasons thing that works :D
     setCurrentIndex((prevIndex) => (prevIndex + 1) % users.length);
-    navigate("/chatsPage");
   }
 
   // if the current user hits the dislike button, we want to add them to the dislike pile
