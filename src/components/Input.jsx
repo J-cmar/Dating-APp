@@ -92,7 +92,7 @@ const Input = () => {
         <label htmlFor="file">
           <img src={Img} alt="" />
         </label>
-        <button onClick={handleSend}>Send</button>
+        <button onClick={handleSend} className="hover:text-red-900">Send</button>
       </div>
     </div>
   );
