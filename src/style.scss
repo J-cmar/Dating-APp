@@ -17,6 +17,89 @@
 }
 
 
+/* Heart shape */
+#heart{
+  position: fixed; /* Change to fixed position */
+  left: 40%;
+  width: 100px;
+  height: 90px;
+  bottom: 10%; /* Stick to the bottom of the viewport */
+}
+#heart:before,
+#heart:after{ 
+  content: "";
+  position: absolute;
+  left: 50px;
+  top: 0;
+  width: 50px;
+  height: 80px;
+  background: #CC3E3E;
+  border-radius: 50px 50px 0;
+  transform-origin: 0 100%;
+  transform: rotate(-45deg);
+}
+#heart:after{
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin :100% 100%;
+}
+
+/* Keyframe animation */
+@keyframes heartbeat {
+0% {
+  transform: scale(1);
+}
+15% {
+  transform: scale(1.4);
+}
+30% {
+  transform: scale(1);
+}
+45% {
+  transform: scale(1.4);
+}
+70% {
+  transform: scale(1);
+}
+}
+
+/* Apply the animation to the heart shape */
+#heart {
+animation: heartbeat 1.3s infinite;
+justify-content: center;
+}
+
+#heartext{
+  font-size: 40px;
+  position: fixed;
+  left: 47%;
+  bottom: 13vh;
+  text-align: center;
+  background-color: rgb(229, 231, 235);
+  border-radius: 8%;
+  justify-content: space-around;
+  margin-left: 15px;
+
+}
+
+@media screen and (max-width: 1644px) {
+  #heartext {
+    font-size: 30px; /* Adjust the font size as needed */
+  }
+}
+@media screen and (max-width: 1400px) {
+  #heartext {
+    font-size: 10px;
+  }
+  #heart{
+    position: fixed; /* Change to fixed position */
+    left: 40%;
+    width: 50px;
+    height: 40px;
+    // bottom: 10%; /* Stick to the bottom of the viewport */
+  }
+}
+
 body {
   background-color: rgb(229, 231, 235);
 }
