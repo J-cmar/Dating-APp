@@ -1,11 +1,11 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Add from "../img/addAvatar.png";
 import unknown from '../img/blank-avatar.png';
 import { db, storage } from "../firebase";
 import { AuthContext } from "../context/AuthContext";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 
 // import {Cropper} from "react-easy-crop";
 
@@ -19,6 +19,15 @@ const UpdateProfile = () => {
   const [loading, setLoading] = useState(false);
   const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
+  let displayName;
+  let photoURL;
+  let age;
+  let bio;
+  let location;
+
+  useEffect(() => {
+    setData(currentUser.uid);
+  });
 
   const handleSubmit = async (e) => {
     setLoading(true);
@@ -76,6 +85,32 @@ const UpdateProfile = () => {
     }
   }
 
+  const setData = async (uid) => {
+    const userRef = doc(db, 'users', uid);
+    const userDoc = await getDoc(userRef);
+    console.log("one way: " + currentUser.uid);
+    console.log("another: " + userDoc.data().uid);
+    displayName = userDoc.data()?.displayName || null;
+    age = userDoc.data()?.age || null;
+    bio = userDoc.data()?.bio || null;
+    location = userDoc.data()?.location || null;
+    photoURL = userDoc.data()?.viewPhotoURL || null;
+    document.getElementById("img").src = photoURL || account;
+    document.getElementById("name").textContent = displayName || '';
+    document.getElementById("age").textContent = age + ", Cal Poly Pomona" || '';
+    document.getElementById("bio").textContent = bio || '';
+    document.getElementById("location").textContent = location + ", CA" || '';
+  }
+
+  const hitLike = async () => {
+
+  }
+
+  // if the current user hits the dislike button, we want to add them to the dislike pile
+  const hitDislike = async () => {
+
+  }
+
   return (
     <>
       <div id="navbar" class="bg-white shadow p-4 w-full">
@@ -84,17 +119,16 @@ const UpdateProfile = () => {
         <nav class="flex items-center justify-center mt-4">
           <a href="/" class="text-gray-600 hover:text-red-500 mx-2">Home</a>
           {/* <a href="#" class="text-gray-600 hover:text-red-500 mx-2">Matches</a> */}
-          <a href="/chatsPage" class="text-gray-w-900 hover:text-red-500 mx-2">Messages</a>
-          <a href="/updateprofile" class="text-gray-600 hover:text-red-500 mx-2">Profile</a>
-          <a href="Community_Guidelines.html" class="text-green-600 hover:text-red-500 mx-2">Commmunity Guidelines</a>
+          <a href="/chatsPage" class="text-gray-600 hover:text-red-500 mx-2">Messages</a>
+          <a href="/updateprofile" class="text-gray-w-900 hover:text-red-500 mx-2">Profile</a>
+          <a href="communityguidelines" class="text-green-600 hover:text-red-500 mx-2">Commmunity Guidelines</a>
           <a onClick={handleSignOut} href="/login" class="text-gray-600 hover:text-red-500 mx-2">Logout</a>
         </nav>
       </div>
-      <div className="formContainer">
 
+      <div className="formContainer">
         <div className="formWrapper">
-          <span className="logo">Fumble</span>
-          <span className="title">Update Profile</span>
+          <span className="logo">Update Profile</span>
           <form onSubmit={handleSubmit}>
             <input required
               style={{ display: "none" }}
@@ -114,13 +148,28 @@ const UpdateProfile = () => {
             {err && <span>Something went wrong</span>}
           </form>
           <p>Image may be cropped!</p>
-          <p>Do later? <Link to="/">Start Viewing!</Link></p>
         </div>
-        <aside>
-          <img src={unknown} height={250} id="userImage" />
+        <aside className="w-1/3 ml-10">
+          <h1 className="text-center">This is what your profile looks like!</h1>
+          <div className="flex justify-center w-full">
+            <div className="bg-white shadow-lg rounded-lg p-6 w-11/12">
+              {/* <!-- Profile image --> */}
+              <img id="img" src="./img/profile-photo-1.webp" alt="Profile Image" className="w-full h-40 object-cover rounded-full" />
+              {/* <!-- User information --> */}
+              <h2 id="name" className="text-xl font-semibold mb-2 self-center"></h2>
+              <p id="age" className="text-gray-600"></p>
+              <p id="location" className="text-gray-600"></p>
+              {/* <!-- Additional profile details --> */}
+              <p id="bio" className="text-gray-700 mt-4"></p>
+              {/* <!-- Like/Dislike buttons --> */}
+              <div className="flex justify-between mt-6">
+                <button onClick={hitLike} className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Like</button>
+                <button onClick={hitDislike} className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Dislike</button>
+              </div>
+            </div>
+          </div>
 
         </aside>
-
       </div>
     </>
   )

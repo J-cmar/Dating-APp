@@ -34,7 +34,7 @@ const ChatPage = () => {
           {/* <a href="#" className="text-gray-600 hover:text-red-500 mx-2">Matches</a> */}
           <a href="/chatsPage" className="text-gray-w-900 hover:text-red-500 mx-2">Messages</a>
           <a href="/updateprofile" className="text-gray-600 hover:text-red-500 mx-2">Profile</a>
-          <a href="Community_Guidelines.html" className="text-green-600 hover:text-red-500 mx-2">Commmunity Guidelines</a>
+          <a href="/communityguidelines" className="text-green-600 hover:text-red-500 mx-2">Commmunity Guidelines</a>
           <a onClick={handleSignOut} href="/login" className="text-gray-600 hover:text-red-500 mx-2">Logout</a>
         </nav>
       </div>

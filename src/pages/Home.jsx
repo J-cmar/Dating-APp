@@ -10,8 +10,8 @@ import './index.css';
 import { signOut } from "firebase/auth"
 
 
-function timeout( delay) {
-  return new Promise( res => setTimeout(res, delay) );
+function timeout(delay) {
+  return new Promise(res => setTimeout(res, delay));
 }
 
 // grabs the user location
@@ -129,7 +129,7 @@ const Home = () => {
         await timeout(2000);
         navigate("/chatsPage");
 
-        
+
 
 
         // navigate to the user info of this new chat message and push to the chatContext.jsx file
@@ -143,7 +143,7 @@ const Home = () => {
         const userField = temp2[length - 1];
         const temp3 = userField[1].userInfo;
         dispatch({ type: "CHANGE_USER", payload: temp3 });
-      } catch (err) { console.log("")}
+      } catch (err) { console.log("") }
     } else if (userDisliked != null && userDisliked.includes(currentUser.uid)) {
       // NEED TO ADD STUFF HERE
       console.log("did not match!");
@@ -183,32 +183,6 @@ const Home = () => {
   }
 
   return (
-    // <html>
-    //   <div className='home'>
-    //     <div className="container">
-    //       <h1>this is the new home</h1>
-    //       <h1>WELCOME TO FUMBLE</h1>
-    //       <br />
-    //       <br />
-    //       <hr />
-    //       <div>
-    //         <img id="img" alt="" src={account} height={100} />
-    //         <p id="name"></p>
-    //         <p id="age"></p>
-    //         <p id="bio"></p>
-    //         <p id="location"></p>
-
-
-    //         <button onClick={hitLike}>Like</button>
-    //         <button onClick={hitDislike}>Dislike</button>
-    //       </div>
-
-    //     </div>
-    //   </div>
-
-
-
-
     <html lang="en">
       <head>
         <meta charset="UTF-8" />
@@ -226,7 +200,7 @@ const Home = () => {
             {/* <a href="#" className="text-gray-600 hover:text-red-500 mx-2">Matches</a> */}
             <a href="/chatsPage" className="text-gray-600 hover:text-red-500 mx-2">Messages</a>
             <a href="/updateprofile" className="text-gray-600 hover:text-red-500 mx-2">Profile</a>
-            <a href="Community_Guidelines.html" className="text-green-600 hover:text-red-500 mx-2">Commmunity Guidelines</a>
+            <a href="/communityguidelines" className="text-green-600 hover:text-red-500 mx-2">Commmunity Guidelines</a>
             <a onClick={handleSignOut} className="text-gray-600 hover:text-red-500 mx-2">Logout</a>
           </nav>
         </div>
@@ -237,11 +211,11 @@ const Home = () => {
             {/* <!-- Profile image --> */}
             <img id="img" src="./img/profile-photo-1.webp" alt="Profile Image" className="w-full h-40 object-cover rounded-full" />
             {/* <!-- User information --> */}
-            <h2 id="name" className="text-xl font-semibold mb-2 self-center">Jane Doe</h2>
-            <p id="age" className="text-gray-600">20, Cal Poly Pomona</p>
-            <p id="location" className="text-gray-600">Computer Science</p>
+            <h2 id="name" className="text-xl font-semibold mb-2 self-center"></h2>
+            <p id="age" className="text-gray-600"></p>
+            <p id="location" className="text-gray-600"></p>
             {/* <!-- Additional profile details --> */}
-            <p id="bio" className="text-gray-700 mt-4">Hi! My name is Jane, and I like to watch movies!</p>
+            <p id="bio" className="text-gray-700 mt-4"></p>
             {/* <!-- Like/Dislike buttons --> */}
             <div className="flex justify-between mt-6">
               <button onClick={hitLike} className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Like</button>
@@ -255,14 +229,14 @@ const Home = () => {
           </div>
           <p id='heartext'>Its a match!</p>
         </div>
-        
+
 
         {/* <!-- Footer --> */}
         <div className="bg-gray-800 text-white p-4 text-center fixed bottom-0 left-0 right-0">
           &copy; Welcome to Fumble
         </div>
 
-        
+
 
       </body>
     </html>

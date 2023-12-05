@@ -41,7 +41,7 @@ const createProfile = () => {
               age,
               major
             }, { merge: true });
-            navigate("/")
+            navigate("/registercg");
           } catch (err) {
             console.log(err);
             setErr(true);
