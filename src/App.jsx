@@ -7,7 +7,7 @@ import "./style.scss";
 import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
-import createProfile from "./pages/createProfile";
+import CreateProfile from "./pages/createProfile";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -36,7 +36,7 @@ function App() {
           <Route path="register" element={<Register />} />
           <Route path="chatspage" element={<ChatPage />} />
           <Route path="updateprofile" element={<UpdateProfile />} />
-          <Route path="createprofile" element={<createProfile />} />
+          <Route path="createprofile" element={<CreateProfile />} />
         </Route>
       </Routes>
     </BrowserRouter>

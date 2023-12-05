@@ -1,12 +1,19 @@
-import React from 'react'
+import { React, useContext } from 'react'
 import Sidebar from '../components/Sidebar'
 import Chat from '../components/Chat'
 import { auth } from '../firebase'
 import { signOut } from "firebase/auth"
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 const ChatPage = () => {
+  const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
+  if (currentUser == null) {
+    navigate("/login")
+  } else {
+    // console.log('not null')
+  }
 
   const handleSignOut = async () => {
     try {

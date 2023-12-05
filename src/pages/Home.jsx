@@ -203,7 +203,7 @@ const Home = () => {
         <title>My Dating App</title>
       </head>
 
-      <body class="bg-gray-100 font-sans">
+      <body class="bg-gray-200 font-sans height-screen">
         <div id="navbar" class="bg-white shadow p-4">
           <h1 class="text-2xl font-semibold text-red-500 text-center">Fumble</h1>
           {/* <!-- Add icons for navigation --> */}
@@ -218,7 +218,7 @@ const Home = () => {
         </div>
 
         {/* <!-- Tinder-like card interface for user profiles --> */}
-        <div class="p-4 flex justify-center max-w-1x1 my-20">
+        <div class="flex justify-center max-w-1x1 my-28">
           <div class="bg-white shadow-lg rounded-lg p-6 w-full sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 max-w-1x1">
             {/* <!-- Profile image --> */}
             <img id="img" src="./img/profile-photo-1.webp" alt="Profile Image" class="w-full h-40 object-cover rounded-full" />
@@ -237,7 +237,7 @@ const Home = () => {
         </div>
 
         {/* <!-- Footer --> */}
-        <div class="bg-gray-800 text-white p-4 text-center mt-60">
+        <div class="bg-gray-800 text-white p-4 text-center fixed bottom-0 left-0 right-0">
           &copy; Welcome to Fumble
         </div>
 

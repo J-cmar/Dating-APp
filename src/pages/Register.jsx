@@ -72,7 +72,7 @@ const Register = () => {
 
             //create empty user chats on firestore
             await setDoc(doc(db, "userChats", res.user.uid), {});
-            navigate("/updateprofile");
+            navigate("/createprofile");
           } catch (err) {
             console.log(err);
             setErr(true);

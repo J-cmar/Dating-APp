@@ -9,14 +9,12 @@ import { doc, setDoc } from "firebase/firestore";
 
 // import {Cropper} from "react-easy-crop";
 
-
-
 const UpdateProfile = () => {
-//   const [image, setImage] = useState(null);
-// const [crop, setCrop] = useState({ x: 0, y: 0 });
-// const [zoom, setZoom] = useState(1);
-// const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
-// const imgRef = useRef(null);
+  //   const [image, setImage] = useState(null);
+  // const [crop, setCrop] = useState({ x: 0, y: 0 });
+  // const [zoom, setZoom] = useState(1);
+  // const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
+  // const imgRef = useRef(null);
   const [err, setErr] = useState(false);
   const [loading, setLoading] = useState(false);
   const { currentUser } = useContext(AuthContext);
@@ -78,54 +76,52 @@ const UpdateProfile = () => {
     }
   }
 
-
-
   return (
     <>
-    <div id="navbar" class="bg-white shadow p-4 w-full">
-    <h1 class="text-2xl font-semibold text-red-500 text-center">Fumble</h1>
-    {/* <!-- Add icons for navigation --> */}
-    <nav class="flex items-center justify-center mt-4">
-      <a href="/" class="text-gray-600 hover:text-red-500 mx-2">Home</a>
-      {/* <a href="#" class="text-gray-600 hover:text-red-500 mx-2">Matches</a> */}
-      <a href="/chatsPage" class="text-gray-w-900 hover:text-red-500 mx-2">Messages</a>
-      <a href="/updateprofile" class="text-gray-600 hover:text-red-500 mx-2">Profile</a>
-      <a href="Community_Guidelines.html" class="text-green-600 hover:text-red-500 mx-2">Commmunity Guidelines</a>
-      <a onClick={handleSignOut} href="/login" class="text-gray-600 hover:text-red-500 mx-2">Logout</a>
-    </nav>
-  </div>
-    <div className="formContainer">
-
-      <div className="formWrapper">
-        <span className="logo">Fumble</span>
-        <span className="title">Please Update Profile</span>
-        <form onSubmit={handleSubmit}>
-          <input required
-            style={{ display: "none" }}
-            type="file"
-            id="file"
-            onChange={showPhoto}
-          />
-          <label htmlFor="file">
-            <img src={Add} alt="" />
-            <span className="label">This is the image people will see when clicking!</span>
-          </label>
-          <input required type="text" placeholder="Update your bio" />
-          <input required type="number" min="18" max="100" placeholder="Enter Age" />
-          <input required type="text" placeholder="Enter Major" />
-          <button disabled={loading}>Update Profile!</button>
-          {loading && "Uploading and compressing the image please wait..."}
-          {err && <span>Something went wrong</span>}
-        </form>
-        <p>Image may be cropped!</p>
-        <p>Do later? <Link to="/">Start Viewing!</Link></p>
+      <div id="navbar" class="bg-white shadow p-4 w-full">
+        <h1 class="text-2xl font-semibold text-red-500 text-center">Fumble</h1>
+        {/* <!-- Add icons for navigation --> */}
+        <nav class="flex items-center justify-center mt-4">
+          <a href="/" class="text-gray-600 hover:text-red-500 mx-2">Home</a>
+          {/* <a href="#" class="text-gray-600 hover:text-red-500 mx-2">Matches</a> */}
+          <a href="/chatsPage" class="text-gray-w-900 hover:text-red-500 mx-2">Messages</a>
+          <a href="/updateprofile" class="text-gray-600 hover:text-red-500 mx-2">Profile</a>
+          <a href="Community_Guidelines.html" class="text-green-600 hover:text-red-500 mx-2">Commmunity Guidelines</a>
+          <a onClick={handleSignOut} href="/login" class="text-gray-600 hover:text-red-500 mx-2">Logout</a>
+        </nav>
       </div>
-      <aside>
-        <img src={unknown} height={250} id="userImage" />
+      <div className="formContainer">
 
-      </aside>
+        <div className="formWrapper">
+          <span className="logo">Fumble</span>
+          <span className="title">Update Profile</span>
+          <form onSubmit={handleSubmit}>
+            <input required
+              style={{ display: "none" }}
+              type="file"
+              id="file"
+              onChange={showPhoto}
+            />
+            <label htmlFor="file">
+              <img src={Add} alt="" />
+              <span className="label">Update Profile Picture</span>
+            </label>
+            <input required type="text" placeholder="Update your bio" />
+            <input required type="number" min="18" max="100" placeholder="Enter New Age" />
+            <input required type="text" placeholder="Change Major" />
+            <button disabled={loading}>Update Profile!</button>
+            {loading && "Uploading and compressing the image please wait..."}
+            {err && <span>Something went wrong</span>}
+          </form>
+          <p>Image may be cropped!</p>
+          <p>Do later? <Link to="/">Start Viewing!</Link></p>
+        </div>
+        <aside>
+          <img src={unknown} height={250} id="userImage" />
 
-    </div>
+        </aside>
+
+      </div>
     </>
   )
 }
