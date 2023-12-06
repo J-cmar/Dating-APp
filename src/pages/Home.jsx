@@ -196,7 +196,7 @@ const Home = () => {
           <h1 className="text-2xl font-semibold text-red-500 text-center">Fumble</h1>
           {/* <!-- Add icons for navigation --> */}
           <nav className="flex items-center justify-center mt-4">
-            <a href="" className="text-gray-w-900 hover:text-red-500 mx-2">Home</a>
+            <a href="/" className="text-gray-w-900 hover:text-red-500 mx-2">Home</a>
             {/* <a href="#" className="text-gray-600 hover:text-red-500 mx-2">Matches</a> */}
             <a href="/chatsPage" className="text-gray-600 hover:text-red-500 mx-2">Messages</a>
             <a href="/updateprofile" className="text-gray-600 hover:text-red-500 mx-2">Profile</a>
