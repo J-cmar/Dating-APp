@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { signOut } from "firebase/auth"
+import { auth } from "../firebase";
 
 const CommunityGuidelines = () => {
     const { currentUser } = useContext(AuthContext);
@@ -10,15 +11,14 @@ const CommunityGuidelines = () => {
     if (currentUser == null) {
         navigate("/login")
     }
-
     const handleSignOut = async () => {
         try {
-            await signOut(auth);
-            navigate('/login');
+          await signOut(auth);
+          navigate('/login');
         } catch (error) {
-            console.error('Error signing out:', error.message);
+          console.error('Error signing out:', error.message);
         }
-    }
+      }
 
     return (
         <div>
