@@ -115,7 +115,7 @@ const Register = () => {
           <input required style={{ display: "none" }} type="file" id="file" />
           <label htmlFor="file">
             <img src={Add} alt="" />
-            <span className="label">Please upload a photo for people to see you!</span>
+            <span className="label">This will be your texting pfp!</span>
           </label>
           <button disabled={loading}>Sign up</button>
           {loading && "Uploading and compressing the image please wait..."}
