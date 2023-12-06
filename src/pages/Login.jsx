@@ -25,12 +25,12 @@ const Login = () => {
         <span className="logo">Fumble</span>
         <span className="title">Login</span>
         <form onSubmit={handleSubmit}>
-          <input type="email" name="email"placeholder="email" />
-          <input type="password" name="password"placeholder="password" />
+          <input type="email" name="email" placeholder="email" />
+          <input type="password" name="password" placeholder="password" />
           <button>Sign in</button>
           {err && <span>Something went wrong</span>}
         </form>
-        <p>You don't have an account? <Link to="/register">Register</Link></p>
+        <p>You don't have an account? <Link className="text-red-500 hover:text-red-700" to="/register">Register</Link></p>
       </div>
     </div>
   );

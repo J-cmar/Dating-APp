@@ -87,7 +87,7 @@ const Register = () => {
   };
 
   return (
-    <div className="formContainer">
+    <div className="formContainerTwo">
       <div className="formWrapper">
         <span className="logo">Fumble</span>
         <span className="title">Register</span>
@@ -122,7 +122,7 @@ const Register = () => {
           {err && <span>Something went wrong</span>}
         </form>
         <p>
-          You do have an account? <Link to="/login">Login</Link>
+          You do have an account? <Link className="text-red-500 hover:text-red-700" to="/login">Login</Link>
         </p>
       </div>
     </div>
