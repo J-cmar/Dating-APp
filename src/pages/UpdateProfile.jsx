@@ -24,6 +24,7 @@ const UpdateProfile = () => {
   let age;
   let bio;
   let location;
+  let major;
 
   useEffect(() => {
     setData(currentUser.uid);
@@ -94,12 +95,14 @@ const UpdateProfile = () => {
     age = userDoc.data()?.age || null;
     bio = userDoc.data()?.bio || null;
     location = userDoc.data()?.location || null;
+    major = userDoc.data()?.major || null;
     photoURL = userDoc.data()?.viewPhotoURL || null;
     document.getElementById("img").src = photoURL || account;
     document.getElementById("name").textContent = displayName || '';
     document.getElementById("age").textContent = age + ", Cal Poly Pomona" || '';
     document.getElementById("bio").textContent = bio || '';
     document.getElementById("location").textContent = location + ", CA" || '';
+    document.getElementById("major").textContent = major || '';
   }
 
   const hitLike = async () => {
@@ -113,7 +116,7 @@ const UpdateProfile = () => {
 
   return (
     <>
-      <div id="navbar" className="bg-white shadow p-4 w-full">
+      <div id="navbar" className="shadow bg-white p-4 w-full">
         <h1 className="text-2xl font-semibold text-red-500 text-center">Fumble</h1>
         {/* <!-- Add icons for navigation --> */}
         <nav class="flex items-center justify-center mt-4">
@@ -150,7 +153,7 @@ const UpdateProfile = () => {
           <p>Image may be cropped!</p>
         </div>
         <aside className="w-1/3 ml-10">
-          <h1 className="text-center">This is what your profile looks like!</h1>
+          <h1 className="text-center mb-4 text-red-400 font-medium">This is what your profile looks like!</h1>
           <div className="flex justify-center w-full">
             <div className="bg-white shadow-lg rounded-lg p-6 w-11/12">
               {/* <!-- Profile image --> */}
@@ -159,6 +162,7 @@ const UpdateProfile = () => {
               <h2 id="name" className="text-xl font-semibold mb-2 self-center"></h2>
               <p id="age" className="text-gray-600"></p>
               <p id="location" className="text-gray-600"></p>
+              <p id="major" className="text-gray-600 font-medium"></p>
               {/* <!-- Additional profile details --> */}
               <p id="bio" className="text-gray-700 mt-4"></p>
               {/* <!-- Like/Dislike buttons --> */}

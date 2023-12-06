@@ -82,6 +82,7 @@ const Home = () => {
       document.getElementById("age").textContent = currentUserViewed.age + ", Cal Poly Pomona" || '';
       document.getElementById("bio").textContent = currentUserViewed.bio || '';
       document.getElementById("location").textContent = currentUserViewed.location + ", CA" || '';
+      document.getElementById("major").textContent = currentUserViewed.major || '';
     }
   }
 
@@ -214,6 +215,7 @@ const Home = () => {
             <h2 id="name" className="text-xl font-semibold mb-2 self-center"></h2>
             <p id="age" className="text-gray-600"></p>
             <p id="location" className="text-gray-600"></p>
+            <p id="major" className="text-gray-600 font-medium"></p>
             {/* <!-- Additional profile details --> */}
             <p id="bio" className="text-gray-700 mt-4"></p>
             {/* <!-- Like/Dislike buttons --> */}
