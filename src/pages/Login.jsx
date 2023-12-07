@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
+import "./Login.scss";
 
 const Login = () => {
   const [err, setErr] = useState(false);
@@ -20,19 +21,28 @@ const Login = () => {
     }
   };
   return (
+    
     <div className="formContainer">
-      <div className="formWrapper">
-        <span className="logo">Fumble</span>
-        <span className="title">Login</span>
-        <form onSubmit={handleSubmit}>
-          <input type="email" name="email" placeholder="email" />
-          <input type="password" name="password" placeholder="password" />
-          <button>Sign in</button>
-          {err && <span>Something went wrong</span>}
-        </form>
-        <p>You don't have an account? <Link className="text-red-500 hover:text-red-700" to="/register">Register</Link></p>
+      <div className="header">
+        <h1> Fumble </h1> 
+      <div className="AboutInfo">
+       <h2>
+        Welcome to Fumble: A Dating App where CPP Students can meet those
+        with similar interests <br /> and interact with each other. 
+       </h2> 
       </div>
-    </div>
+      </div>
+       <div className="formWrapper">
+          <span className="title">Login</span>
+          <form onSubmit={handleSubmit}>
+            <input type="email" name="email" placeholder="email" />
+            <input type="password" name="password" placeholder="password" />
+            <button>Sign in</button>
+           {err && <span>Something went wrong</span>}
+         </form>
+         <p>You don't have an account? <Link className="text-red-500 hover:text-red-700" to="/register">Register</Link></p>
+        </div>
+       </div>
   );
 };
 
